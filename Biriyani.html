@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Biryani Calculator</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f4f4;
+padding:40px;
+}
+
+.container{
+background:white;
+padding:25px;
+max-width:600px;
+margin:auto;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+
+button{
+margin-top:15px;
+padding:10px;
+width:100%;
+background:#008000;
+color:white;
+border:none;
+font-size:16px;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:left;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Biryani Ingredient Calculator</h2>
+
+<label>Enter Rice Quantity (kg)</label>
+<input type="number" id="rice" step="0.1" placeholder="Example: 2">
+
+<button onclick="calculate()">Calculate</button>
+
+<table>
+
+<tr>
+<th>Ingredient</th>
+<th>Quantity</th>
+</tr>
+
+<tbody id="result"></tbody>
+
+</table>
+
+</div>
+
+<script>
+
+function formatWeight(gm){
+
+if(gm >= 1000){
+
+let kg = Math.floor(gm/1000)
+let g = gm % 1000
+
+if(g==0)
+return kg + " kg"
+
+return kg + " kg " + g + " gm"
+}
+
+return gm + " gm"
+}
+
+function formatLiquid(ml){
+
+if(ml >= 1000){
+
+let l = Math.floor(ml/1000)
+let m = ml % 1000
+
+if(m==0)
+return l + " liter"
+
+return l + " liter " + m + " ml"
+}
+
+return ml + " ml"
+}
+
+function calculate(){
+
+let rice = document.getElementById("rice").value
+
+let data = [
+
+["Onion", formatWeight(400*rice)],
+["Tomato", formatWeight(400*rice)],
+["Ginger", formatWeight(100*rice)],
+["Garlic", formatWeight(100*rice)],
+["Curd", formatLiquid(200*rice)],
+["All Spices", formatWeight(1*rice)],
+["Oil", formatLiquid(200*rice)],
+["Ghee", formatLiquid(100*rice)],
+["Coriander / Mint", (0.5*rice)+" kattu"],
+["Green Chilli", (3*rice)+" pcs"],
+["Red Chilli Powder", (2*rice)+" tbsp"],
+["Chicken", formatWeight(1000*rice)],
+["India Gate Dubar Rice", formatWeight(1000*rice)],
+["Water", formatLiquid(1300*rice)]
+
+]
+
+let html=""
+
+data.forEach(function(item){
+
+html += "<tr><td>"+item[0]+"</td><td>"+item[1]+"</td></tr>"
+
+})
+
+document.getElementById("result").innerHTML = html
+
+}
+
+</script>
+
+</body>
+
+</html>
